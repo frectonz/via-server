@@ -7,7 +7,7 @@
     "start": "node .",
     "dev": "nodemon .",
     "prestart": "yarn build",
-    "build": "node ./node_modules/.bin/tsc"
+    "build": "yarn && yarn tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",
