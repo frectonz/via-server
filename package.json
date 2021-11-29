@@ -4,10 +4,10 @@
   "description": "Server for via",
   "main": "dist/server.js",
   "scripts": {
-    "tsc": "tsc",
     "start": "node .",
     "dev": "nodemon .",
-    "prestart": "npm run tsc"
+    "prestart": "yarn build",
+    "build": "node ./node_modules/.bin/tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",
