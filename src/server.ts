@@ -66,7 +66,3 @@ main();
 process.on("unhandledRejection", (err: Error, _) => {
   console.log(`Error: ${err.message}`);
 });
-
-process.on("SIGTERM", (signal) => {
-  console.log(signal);
-});
