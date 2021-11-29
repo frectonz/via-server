@@ -13,54 +13,48 @@ import session from "./routes/session.route";
 
 import errorHandler from "./middleware/error";
 
-const main = async () => {
-  // Load env vars
-  dotenv.config({ path: "config.env" });
+// Load env vars
+dotenv.config({ path: "config.env" });
 
-  const app = express();
+const app = express();
 
-  // Connect to database
-  await connectDB();
+// Connect to database
+connectDB();
 
-  // Body parser
-  app.use(express.json({ limit: "50mb" }));
+// Body parser
+app.use(express.json({ limit: "50mb" }));
 
-  // Dev logging middleware
-  if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"));
-  } else {
-    app.use(morgan("combined"));
-  }
+// Dev logging middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+} else {
+  app.use(morgan("combined"));
+}
 
-  // Set security headers
-  app.use(helmet());
-  // Prevent http param pollution
-  app.use(hpp());
-  // Enable CORS
-  app.use(cors());
+// Set security headers
+app.use(helmet());
+// Prevent http param pollution
+app.use(hpp());
+// Enable CORS
+app.use(cors());
 
-  app.get("/", (req, res) => {
-    res.json("Hello");
-  });
+app.get("/", (req, res) => {
+  res.json("Hello");
+});
 
-  // Mount routers
-  app.use("/api/path", path);
-  app.use("/api/session", session);
+// Mount routers
+app.use("/api/path", path);
+app.use("/api/session", session);
 
-  app.use(errorHandler);
+app.use(errorHandler);
 
-  const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-  console.log(process.env);
+console.log(process.env);
 
-  app.listen(PORT, () =>
-    console.log(
-      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-    )
-  );
-};
-
-main();
+app.listen(PORT, () =>
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err: Error, _) => {
