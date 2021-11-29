@@ -15,8 +15,7 @@ import errorHandler from "./middleware/error";
 
 const main = async () => {
   // Load env vars
-  if (process.env.NODE_ENV === "development")
-    dotenv.config({ path: "config.env" });
+  dotenv.config({ path: "config.env" });
 
   const app = express();
 
